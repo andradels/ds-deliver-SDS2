@@ -19,7 +19,7 @@ import javax.persistence.Table;
 public class Order implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -28,11 +28,9 @@ public class Order implements Serializable {
 	private Double longitude;
 	private Instant moment;
 	private OrderStatus status;
-	
+
 	@ManyToMany
-	@JoinTable(name = "tb_order_product", 
-			joinColumns = @JoinColumn(name = "order_id"),
-			inverseJoinColumns = @JoinColumn(name = "product_id")) 
+	@JoinTable(name = "tb_order_product", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
 	private Set<Product> products = new HashSet<>();
 
 	public Order() {
@@ -96,7 +94,10 @@ public class Order implements Serializable {
 		this.status = status;
 	}
 
-	
+	public Set<Product> getProducts() {
+		return products;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
